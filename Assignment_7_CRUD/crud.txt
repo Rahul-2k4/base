@@ -1,0 +1,106 @@
+mkdir crud-api
+cd crud-api
+
+npm init -y
+
+npm install express mongoose cors
+npm install nodemon --save-dev
+
+// file structure
+
+crud-api/
+│
+├── server.js
+├── package.json
+
+// replace package.json scripts
+
+"scripts": {
+  "start": "node server.js",
+  "dev": "nodemon server.js"
+}
+
+// server.js
+
+const express = require("express");
+const mongoose = require("mongoose");
+const cors = require("cors");
+
+const app = express();
+
+// Middleware
+app.use(express.json());
+app.use(cors());
+
+// MongoDB Connection
+mongoose.connect("mongodb://127.0.0.1:27017/wadcrud")
+.then(() => console.log("MongoDB Connected"))
+.catch((err) => console.log(err));
+
+// Schema
+const studentSchema = new mongoose.Schema({
+    name: String,
+    age: Number,
+    course: String
+});
+
+// Model
+const Student = mongoose.model("Student", studentSchema);
+
+// ---------------- CRUD APIs ----------------
+
+// 1. CREATE API
+app.post("/addStudent", async (req, res) => {
+    try {
+        const student = new Student(req.body);
+        await student.save();
+        res.send("Student Added Successfully");
+    } catch (err) {
+        res.send(err);
+    }
+});
+
+// 2. READ API
+app.get("/students", async (req, res) => {
+    try {
+        const students = await Student.find();
+        res.json(students);
+    } catch (err) {
+        res.send(err);
+    }
+});
+
+// 3. UPDATE API
+app.put("/updateStudent/:id", async (req, res) => {
+    try {
+        await Student.findByIdAndUpdate(req.params.id, req.body);
+        res.send("Student Updated Successfully");
+    } catch (err) {
+        res.send(err);
+    }
+});
+
+// 4. DELETE API
+app.delete("/deleteStudent/:id", async (req, res) => {
+    try {
+        await Student.findByIdAndDelete(req.params.id);
+        res.send("Student Deleted Successfully");
+    } catch (err) {
+        res.send(err);
+    }
+});
+
+// Server
+app.listen(5000, () => {
+    console.log("Server running on port 5000");
+});
+
+// command to run
+
+npm run dev
+
+
+// now test using 
+//extensions
+//Thunder Client
+//MongoDB for VS Code

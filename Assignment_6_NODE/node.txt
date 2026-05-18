@@ -1,0 +1,107 @@
+mkdir static-website
+
+cd static-website
+
+npm init -y
+
+npm install express
+
+
+// create this file structure
+static-website/
+│
+├── public/
+│   ├── index.html
+│   ├── style.css
+│   └── script.js
+│
+└── server.js
+
+// server.js
+
+const express = require("express");
+
+const app = express();
+
+const PORT = 3000;
+
+// Serve static files
+app.use(express.static("public"));
+
+app.listen(PORT, () => {
+    console.log(`Server running at http://localhost:${PORT}`);
+});
+
+// index.html
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Static Website</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+
+        <h1>Welcome to My Static Website</h1>
+
+        <p>This website is served using Node.js and Express.js</p>
+
+        <button onclick="showMessage()">
+            Click Me
+        </button>
+
+        <h3 id="msg"></h3>
+
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
+
+// style.css
+
+body {
+    margin: 0;
+    font-family: Arial;
+    background: linear-gradient(to right, #74ebd5, #ACB6E5);
+}
+
+.container {
+    width: 500px;
+    margin: 150px auto;
+    text-align: center;
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px gray;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: royalblue;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: darkblue;
+}
+
+
+// script.js
+
+function showMessage() {
+    document.getElementById("msg").innerHTML =
+        "Website Successfully Served by Node.js!";
+}
+
+
+// commands to run
+
+node server.js
