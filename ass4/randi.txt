@@ -1,0 +1,28 @@
+1. download docker desktop
+2. download node.js
+3. open docker desktop 
+4. allow all the things asked
+5. docker whale will show and then write-
+6. docker --version
+7  open vs code
+8. make a folder and open it(make folder in lowercase)
+9. download docker extension
+10. make 2 files in the folder: Dockerfile and xyz.js
+11. go to xyz.js and write:
+    console.log("name:sid");
+    console.log("class: TE");
+    console.log("subject- LP2");
+    console.log("assignment-2b");
+
+12. go to Dockerfile and write-
+    FROM node:alpine
+    COPY . /ass2b
+    CMD node /ass2b/sid.js
+
+13. save both and open new terminal in vs code
+14. check docker version by: docker --version
+15. write: node xyz.js
+16. write: docker build -t foldername .
+17. it'll build images for the folder
+18. write: docker images
+19. it'll show the latest image created
