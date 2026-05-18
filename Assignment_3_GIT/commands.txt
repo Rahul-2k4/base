@@ -1,0 +1,15 @@
+git config user.name "YourName"
+
+git config user.email "youremail@gmail.com"
+
+git init
+
+git add .
+
+git commit -m "First Commit"
+
+git branch -M main
+
+git remote add origin https://github.com/username/repositoryname.git
+
+git push -u origin main
