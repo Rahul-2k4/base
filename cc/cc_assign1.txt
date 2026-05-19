@@ -1,0 +1,87 @@
+// app.yaml
+
+application: folder-name
+version: 1
+runtime: python
+api_version: 1
+
+handlers:
+- url: /.*
+  script: main.py
+
+// calculator
+
+import cgi
+
+print("Content-type:text/html\r\n\r\n")
+
+f = cgi.FieldStorage()
+
+n1 = float(f.getvalue("n1", 0))
+n2 = float(f.getvalue("n2", 0))
+op = f.getvalue("op", "+")
+
+if op == "+":
+    r = n1 + n2
+elif op == "-":
+    r = n1 - n2
+elif op == "*":
+    r = n1 * n2
+else:
+    r = "Error" if n2 == 0 else n1 / n2
+
+print("""
+<form>
+<input name=n1>
+<input name=n2>
+
+<select name=op>
+<option>+</option>
+<option>-</option>
+<option>*</option>
+<option>/</option>
+</select>
+
+<input type=submit>
+</form>
+
+<h3>Result = %s</h3>
+""" % r)
+
+//Fibonaci
+
+a = 0
+b = 1
+
+print("First 10 Fibonacci Numbers")
+
+for i in range(10):
+    print(a)
+
+    c = a + b
+    a = b
+    b = c
+
+//Largest
+
+n1 = 10
+n2 = 25
+n3 = 15
+
+ print("The maximum number is:", max(n1, n2, n3))
+
+//print name
+
+for i in range(5):
+
+    print ("Name : Rahul Yadav")
+    print ("Seat Number : 12345")
+    print ("Department : Computer Engineering")
+    print ("")
+
+// Table
+
+print "Table of 10"
+
+for i in range(1, 11):
+    print ("10 x"+ str(i) +  "=" +  str(10 * i))

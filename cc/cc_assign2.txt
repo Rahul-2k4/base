@@ -1,0 +1,9 @@
+ls
+
+ifconfig
+
+touch / nano input.txt
+
+scp input.txt vagrant@ip_address:/home/vagrant
+
+last check using ls/ nano
